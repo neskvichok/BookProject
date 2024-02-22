@@ -5,7 +5,8 @@ export const CreateBookSchema = z.object({
   author: z.string(),
   pageNum: z.number(),
   isbn: z.string(),
-  rate: z.number(),
+  description: z.string(),
+  // rate: z.number(),
   // template: __fieldName__: z.__zodType__(),
 })
 export const UpdateBookSchema = CreateBookSchema.merge(

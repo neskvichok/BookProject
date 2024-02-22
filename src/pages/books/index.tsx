@@ -17,6 +17,12 @@ import {
   Heading,
   Stack,
   Text,
+  Container,
+  Image,
+  Img,
+  Center,
+  SimpleGrid,
+  VStack,
 } from "@chakra-ui/react"
 
 const ITEMS_PER_PAGE = 100
@@ -32,35 +38,50 @@ export const BooksList = () => {
 
   const goToPreviousPage = () => router.push({ query: { page: page - 1 } })
   const goToNextPage = () => router.push({ query: { page: page + 1 } })
-
+  const height = 100
+  const width = 50
   return (
-    <div style={{ display: "flex", flexWrap: "wrap", gap: "20px" }}>
-      {books.map((book) => (
-        <Card key={book.id} maxW="sm">
-          <CardBody>
-            <Stack mt="6" spacing="3">
-              <Heading size="md">
-                <Link href={Routes.ShowBookPage({ bookId: book.id })}>{book.name}</Link>
-              </Heading>
-              <Text>This is book description сапмроилд аспмрио прмои </Text>
-            </Stack>
-          </CardBody>
-          <Divider />
-          <CardFooter>
-            <ButtonGroup spacing="2">
-              <Heading size="sm">Add to favourite</Heading>
-            </ButtonGroup>
-          </CardFooter>
-        </Card>
-      ))}
-
-      <button disabled={page === 0} onClick={goToPreviousPage}>
-        Previous
-      </button>
-      <button disabled={!hasMore} onClick={goToNextPage}>
-        Next
-      </button>
-    </div>
+    <VStack>
+      <Center>
+        <SimpleGrid columns={2} spacing={10}>
+          {books.map((book) => (
+            <Card key={book.id} maxW="lg">
+              <HStack>
+                <Img
+                  src={`https://picsum.photos/id/${book.id + 250}/200/300`}
+                  width="200px"
+                  height="300px"
+                />
+                <Container>
+                  <CardBody>
+                    <Stack mt="6" spacing="3">
+                      <Heading size="md">
+                        <Link href={Routes.ShowBookPage({ bookId: book.id })}>{book.name}</Link>
+                      </Heading>
+                      <Text>This is book description сапмроилд аспмрио прмои </Text>
+                    </Stack>
+                  </CardBody>
+                  <Divider />
+                  <CardFooter>
+                    <ButtonGroup spacing="2">
+                      <Heading size="sm">Add to favourite</Heading>
+                    </ButtonGroup>
+                  </CardFooter>
+                </Container>
+              </HStack>
+            </Card>
+          ))}
+        </SimpleGrid>
+      </Center>
+      <footer>
+        <button disabled={page === 0} onClick={goToPreviousPage}>
+          Previous
+        </button>
+        <button disabled={!hasMore} onClick={goToNextPage}>
+          Next
+        </button>
+      </footer>
+    </VStack>
   )
 }
 
@@ -72,10 +93,6 @@ const BooksPage = () => {
       </Head>
 
       <div>
-        <p>
-          <Link href={Routes.NewBookPage()}>Create Book</Link>
-        </p>
-
         <Suspense fallback={<div>Loading...</div>}>
           <BooksList />
         </Suspense>

@@ -2,6 +2,8 @@ import { useState, ReactNode, PropsWithoutRef } from "react"
 import { Formik, FormikProps } from "formik"
 import { validateZodSchema } from "blitz"
 import { z } from "zod"
+import { ArrowForwardIcon } from "@chakra-ui/icons"
+import { Button } from "@chakra-ui/react"
 
 export interface FormProps<S extends z.ZodType<any, any>>
   extends Omit<PropsWithoutRef<JSX.IntrinsicElements["form"]>, "onSubmit"> {
@@ -58,9 +60,21 @@ export function Form<S extends z.ZodType<any, any>>({
           )}
 
           {submitText && (
-            <button type="submit" disabled={isSubmitting}>
+            <Button
+              type="submit"
+              disabled={isSubmitting}
+              size="md"
+              height="48px"
+              width="200px"
+              border="2px"
+              borderColor="blue.500"
+              textColor="blue.500"
+              colorScheme="teal"
+              variant="outline"
+              rightIcon={<ArrowForwardIcon />}
+            >
               {submitText}
-            </button>
+            </Button>
           )}
 
           <style global jsx>{`

@@ -36,7 +36,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     <ChakraProvider>
       <TopMenu />
       <ErrorBoundary FallbackComponent={RootErrorFallback}>
-        <div style={{ marginTop: "60px" }}> {getLayout(<Component {...pageProps} />)}</div>
+        <div style={{ marginTop: "75px" }}> {getLayout(<Component {...pageProps} />)}</div>
       </ErrorBoundary>
     </ChakraProvider>
   )

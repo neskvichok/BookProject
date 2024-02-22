@@ -21,22 +21,7 @@ const NewBookPage = () => {
         <Box width="100%" maxWidth="600px">
           <Suspense fallback={<div>Loading...</div>}>
             <BookForm
-              submitText={
-                <Button
-                  size="md"
-                  height="48px"
-                  width="200px"
-                  border="2px"
-                  borderColor="blue.500"
-                  textColor="blue.500"
-                  type="submit"
-                  colorScheme="teal"
-                  variant="outline"
-                  rightIcon={<ArrowForwardIcon />}
-                >
-                  Create Book
-                </Button>
-              }
+              submitText="Create book"
               schema={CreateBookSchema}
               onSubmit={async (values) => {
                 try {
