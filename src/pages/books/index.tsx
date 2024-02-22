@@ -6,6 +6,16 @@ import { usePaginatedQuery } from "@blitzjs/rpc"
 import { useRouter } from "next/router"
 import Layout from "src/core/layouts/Layout"
 import getBooks from "src/books/queries/getBooks"
+import {
+  ButtonGroup,
+  Card,
+  CardBody,
+  CardFooter,
+  Divider,
+  Heading,
+  Stack,
+  Text,
+} from "@chakra-ui/react"
 
 const ITEMS_PER_PAGE = 100
 
@@ -22,14 +32,25 @@ export const BooksList = () => {
   const goToNextPage = () => router.push({ query: { page: page + 1 } })
 
   return (
-    <div>
-      <ul>
-        {books.map((book) => (
-          <li key={book.id}>
-            <Link href={Routes.ShowBookPage({ bookId: book.id })}>{book.name}</Link>
-          </li>
-        ))}
-      </ul>
+    <div style={{ display: "flex", flexWrap: "wrap", gap: "20px" }}>
+      {books.map((book) => (
+        <Card key={book.id} maxW="sm">
+          <CardBody>
+            <Stack mt="6" spacing="3">
+              <Heading size="md">
+                <Link href={Routes.ShowBookPage({ bookId: book.id })}>{book.name}</Link>
+              </Heading>
+              <Text>This is book description сапмроилд аспмрио прмои </Text>
+            </Stack>
+          </CardBody>
+          <Divider />
+          <CardFooter>
+            <ButtonGroup spacing="2">
+              <Heading size="sm">Add to favourite</Heading>
+            </ButtonGroup>
+          </CardFooter>
+        </Card>
+      ))}
 
       <button disabled={page === 0} onClick={goToPreviousPage}>
         Previous
