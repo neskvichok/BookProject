@@ -24,6 +24,7 @@ import {
   SimpleGrid,
   VStack,
   Button,
+  CardHeader,
 } from "@chakra-ui/react"
 import { ArrowBackIcon, ArrowForwardIcon } from "@chakra-ui/icons"
 

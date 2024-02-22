@@ -11,6 +11,7 @@ import { UpdateBookSchema } from "src/books/schemas"
 import getBook from "src/books/queries/getBook"
 import updateBook from "src/books/mutations/updateBook"
 import { BookForm, FORM_ERROR } from "src/books/components/BookForm"
+import { Box, Card, CardBody, CardHeader, Flex, Heading } from "@chakra-ui/react"
 
 export const EditBook = () => {
   const router = useRouter()
@@ -32,30 +33,41 @@ export const EditBook = () => {
       </Head>
 
       <div>
-        <h1>Edit Book {book.id}</h1>
-        <pre>{JSON.stringify(book, null, 2)}</pre>
-        <Suspense fallback={<div>Loading...</div>}>
-          <BookForm
-            submitText="Update Book"
-            schema={UpdateBookSchema}
-            initialValues={book}
-            onSubmit={async (values) => {
-              try {
-                const updated = await updateBookMutation({
-                  id: book.id,
-                  ...values,
-                })
-                await setQueryData(updated)
-                await router.push(Routes.ShowBookPage({ bookId: updated.id }))
-              } catch (error: any) {
-                console.error(error)
-                return {
-                  [FORM_ERROR]: error.toString(),
-                }
-              }
-            }}
-          />
-        </Suspense>
+        <Layout title={"Edit Book"}>
+          <Flex direction="column" align="center" justify="center" minHeight="80vh">
+            <Box width="100%" maxWidth="600px">
+              <Card>
+                <CardHeader>
+                  <Heading>Edit Book</Heading>
+                </CardHeader>
+                <CardBody>
+                  <Suspense fallback={<div>Loading...</div>}>
+                    <BookForm
+                      submitText="Update Book"
+                      schema={UpdateBookSchema}
+                      initialValues={book}
+                      onSubmit={async (values) => {
+                        try {
+                          const updated = await updateBookMutation({
+                            id: book.id,
+                            ...values,
+                          })
+                          await setQueryData(updated)
+                          await router.push(Routes.ShowBookPage({ bookId: updated.id }))
+                        } catch (error: any) {
+                          console.error(error)
+                          return {
+                            [FORM_ERROR]: error.toString(),
+                          }
+                        }
+                      }}
+                    />
+                  </Suspense>
+                </CardBody>
+              </Card>
+            </Box>
+          </Flex>
+        </Layout>
       </div>
     </>
   )
@@ -67,10 +79,6 @@ const EditBookPage = () => {
       <Suspense fallback={<div>Loading...</div>}>
         <EditBook />
       </Suspense>
-
-      <p>
-        <Link href={Routes.BooksPage()}>Books</Link>
-      </p>
     </div>
   )
 }
