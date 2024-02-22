@@ -8,7 +8,7 @@ export interface FormProps<S extends z.ZodType<any, any>>
   /** All your form fields */
   children?: ReactNode
   /** Text to display in the submit button */
-  submitText?: string
+  submitText?: ReactNode
   schema?: S
   onSubmit: (values: z.infer<S>) => Promise<void | OnSubmitResult>
   initialValues?: FormikProps<z.infer<S>>["initialValues"]

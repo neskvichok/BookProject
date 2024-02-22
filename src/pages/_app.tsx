@@ -1,10 +1,14 @@
 import { ErrorFallbackProps, ErrorComponent, ErrorBoundary, AppProps } from "@blitzjs/next"
 import { AuthenticationError, AuthorizationError } from "blitz"
 import React from "react"
+import Link from "next/link"
+import { Routes } from "@blitzjs/next"
+import { useRouter } from "next/router"
 import { withBlitz } from "src/blitz-client"
 import "src/styles/globals.css"
 
-import { ChakraProvider } from "@chakra-ui/react"
+import { ChakraProvider, HStack, Flex } from "@chakra-ui/react"
+import TopMenu from "./_TopMenu"
 
 function RootErrorFallback({ error }: ErrorFallbackProps) {
   if (error instanceof AuthenticationError) {
@@ -30,8 +34,9 @@ function MyApp({ Component, pageProps }: AppProps) {
   const getLayout = Component.getLayout || ((page) => page)
   return (
     <ChakraProvider>
+      <TopMenu />
       <ErrorBoundary FallbackComponent={RootErrorFallback}>
-        {getLayout(<Component {...pageProps} />)}
+        <div style={{ marginTop: "60px" }}> {getLayout(<Component {...pageProps} />)}</div>
       </ErrorBoundary>
     </ChakraProvider>
   )

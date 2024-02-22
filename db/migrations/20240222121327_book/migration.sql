@@ -7,5 +7,5 @@ CREATE TABLE "Book" (
     "author" TEXT NOT NULL,
     "pageNum" INTEGER NOT NULL,
     "isbn" TEXT NOT NULL,
-    "rate" REAL NOT NULL
+    "rate" REAL NOT NULL DEFAULT 5
 );
