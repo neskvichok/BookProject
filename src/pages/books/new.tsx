@@ -24,8 +24,10 @@ const NewBookPage = () => {
               submitText="Create book"
               schema={CreateBookSchema}
               onSubmit={async (values) => {
+                console.log(values)
                 try {
                   const book = await createBookMutation(values)
+
                   await router.push(Routes.ShowBookPage({ bookId: book.id }))
                 } catch (error: any) {
                   console.error(error)

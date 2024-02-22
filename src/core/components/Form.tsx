@@ -62,14 +62,12 @@ export function Form<S extends z.ZodType<any, any>>({
           {submitText && (
             <Button
               type="submit"
-              disabled={isSubmitting}
+              isDisabled={isSubmitting}
               size="md"
               height="48px"
               width="200px"
               border="2px"
-              borderColor="blue.500"
-              textColor="blue.500"
-              colorScheme="teal"
+              colorScheme="blue"
               variant="outline"
               rightIcon={<ArrowForwardIcon />}
             >

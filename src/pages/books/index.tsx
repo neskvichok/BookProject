@@ -23,9 +23,11 @@ import {
   Center,
   SimpleGrid,
   VStack,
+  Button,
 } from "@chakra-ui/react"
+import { ArrowBackIcon, ArrowForwardIcon } from "@chakra-ui/icons"
 
-const ITEMS_PER_PAGE = 100
+const ITEMS_PER_PAGE = 10
 
 export const BooksList = () => {
   const router = useRouter()
@@ -58,7 +60,20 @@ export const BooksList = () => {
                       <Heading size="md">
                         <Link href={Routes.ShowBookPage({ bookId: book.id })}>{book.name}</Link>
                       </Heading>
-                      <Text>This is book description сапмроилд аспмрио прмои </Text>
+                      <Text as="i">{book.author}</Text>
+                      {book.description ? (
+                        <div>
+                          <Text as="b">Description:</Text>
+                          <Text>
+                            <Text>
+                              {book.description.substring(0, 90)}
+                              {book.description.length > 90 ? "..." : ""}
+                            </Text>
+                          </Text>
+                        </div>
+                      ) : (
+                        <Text>There is no Description</Text>
+                      )}
                     </Stack>
                   </CardBody>
                   <Divider />
@@ -73,13 +88,26 @@ export const BooksList = () => {
           ))}
         </SimpleGrid>
       </Center>
-      <footer>
-        <button disabled={page === 0} onClick={goToPreviousPage}>
+      <footer style={{ margin: "20px", padding: "5px" }}>
+        <Button
+          leftIcon={<ArrowBackIcon />}
+          colorScheme="blue"
+          variant="outline"
+          isDisabled={page === 0}
+          onClick={goToPreviousPage}
+          marginRight="15px"
+        >
           Previous
-        </button>
-        <button disabled={!hasMore} onClick={goToNextPage}>
+        </Button>
+        <Button
+          colorScheme="blue"
+          rightIcon={<ArrowForwardIcon />}
+          variant="outline"
+          isDisabled={!hasMore}
+          onClick={goToNextPage}
+        >
           Next
-        </button>
+        </Button>
       </footer>
     </VStack>
   )

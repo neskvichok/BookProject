@@ -5,7 +5,7 @@ export const CreateBookSchema = z.object({
   author: z.string(),
   pageNum: z.number(),
   isbn: z.string(),
-  description: z.string(),
+  description: z.string().optional(),
   // rate: z.number(),
   // template: __fieldName__: z.__zodType__(),
 })

@@ -11,6 +11,7 @@ import {
 import React, { Suspense } from "react"
 import { Form, FormProps } from "src/core/components/Form"
 import { LabeledTextField } from "src/core/components/LabeledTextField"
+import { LabeledLargeTextField } from "src/core/components/LabeledLargeTextField"
 import { ChakraProvider, FormControl, Input, extendTheme, Box } from "@chakra-ui/react"
 const activeLabelStyles = {
   transform: "scale(0.85) translateY(-24px)",
@@ -49,7 +50,7 @@ export function BookForm<S extends z.ZodType<any, any>>(props: FormProps<S>) {
             isRequired
           />
           <LabeledTextField name="isbn" label="Isbn*" placeholder="Isbn" type="text" isRequired />
-          <Textarea
+          <LabeledLargeTextField
             height="auto"
             minHeight="100px"
             name="description"
