@@ -38,8 +38,11 @@ function TopMenu() {
         <Link href={Routes.Page404()}>
           <Heading size="md"> Account</Heading>
         </Link>
-        <Link href={Routes.NewBookPage()}>
+        <Link href={Routes.LikedBooksPage()}>
           <Heading size="md"> My Favourite</Heading>
+        </Link>
+        <Link href={Routes.ReadBooksPage()}>
+          <Heading size="md"> My Read</Heading>
         </Link>
       </HStack>
     </Flex>

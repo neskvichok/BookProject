@@ -29,13 +29,14 @@ import {
 import { ArrowBackIcon, ArrowForwardIcon } from "@chakra-ui/icons"
 import { Heart, HeartFill } from "react-bootstrap-icons"
 import SmallBookCard from "src/books/components/SmallBookCard"
-import LikedSmallBookCard from "src/books/components/LikedSmallBookCard"
+import ReadSmallBookCard from "src/books/components/ReadSmallBookCard"
 
-const ITEMS_PER_PAGE = 10
+const ITEMS_PER_PAGE = 100
 
-export const BooksList = () => {
+export const ReadBooksList = () => {
   const router = useRouter()
-  const page = Number(router.query.page) || 0
+  // const page = Number(router.query.page) || 0
+  const page = 0
   const [{ books, hasMore }] = usePaginatedQuery(getBooks, {
     orderBy: { id: "asc" },
     skip: ITEMS_PER_PAGE * page,
@@ -51,7 +52,7 @@ export const BooksList = () => {
       <Center>
         <SimpleGrid columns={2} spacing={10}>
           {books.map((book) => (
-            <SmallBookCard key={book.id} book={book} />
+            <ReadSmallBookCard key={book.id} book={book} />
           ))}
         </SimpleGrid>
       </Center>
@@ -80,7 +81,7 @@ export const BooksList = () => {
   )
 }
 
-const BooksPage = () => {
+const ReadBooksPage = () => {
   return (
     <Layout>
       <Head>
@@ -89,11 +90,11 @@ const BooksPage = () => {
 
       <div>
         <Suspense fallback={<div>Loading...</div>}>
-          <BooksList />
+          <ReadBooksList />
         </Suspense>
       </div>
     </Layout>
   )
 }
 
-export default BooksPage
+export default ReadBooksPage
