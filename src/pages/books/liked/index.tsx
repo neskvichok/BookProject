@@ -59,7 +59,7 @@ export const LikedBooksList = () => {
       <footer style={{ margin: "20px", padding: "5px" }}>
         <Button
           leftIcon={<ArrowBackIcon />}
-          colorScheme="blue"
+          colorScheme="grey"
           variant="outline"
           isDisabled={page === 0}
           onClick={goToPreviousPage}
@@ -68,7 +68,7 @@ export const LikedBooksList = () => {
           Previous
         </Button>
         <Button
-          colorScheme="blue"
+          colorScheme="grey"
           rightIcon={<ArrowForwardIcon />}
           variant="outline"
           isDisabled={!hasMore}

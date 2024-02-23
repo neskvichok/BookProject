@@ -17,7 +17,7 @@ function TopMenu() {
       align="center"
       justify="space-between"
       padding="1rem"
-      bg="blue.500"
+      bg="grey"
       color="white"
       position="fixed"
       top="0"

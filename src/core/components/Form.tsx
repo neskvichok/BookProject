@@ -67,7 +67,7 @@ export function Form<S extends z.ZodType<any, any>>({
               height="48px"
               width="200px"
               border="2px"
-              colorScheme="blue"
+              colorScheme="grey"
               variant="outline"
               rightIcon={<ArrowForwardIcon />}
             >
