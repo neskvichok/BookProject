@@ -27,6 +27,8 @@ import {
   CardHeader,
 } from "@chakra-ui/react"
 import { ArrowBackIcon, ArrowForwardIcon } from "@chakra-ui/icons"
+import { Heart, HeartFill } from "react-bootstrap-icons"
+import SmallBookCard from "src/books/components/SmallBookCard"
 
 const ITEMS_PER_PAGE = 10
 
@@ -48,44 +50,7 @@ export const BooksList = () => {
       <Center>
         <SimpleGrid columns={2} spacing={10}>
           {books.map((book) => (
-            <Card key={book.id} maxW="lg">
-              <HStack>
-                <Img
-                  src={`https://picsum.photos/id/${book.id + 250}/200/300`}
-                  width="200px"
-                  height="300px"
-                />
-                <Container>
-                  <CardBody>
-                    <Stack mt="6" spacing="3">
-                      <Heading size="md">
-                        <Link href={Routes.ShowBookPage({ bookId: book.id })}>{book.name}</Link>
-                      </Heading>
-                      <Text as="i">{book.author}</Text>
-                      {book.description ? (
-                        <div>
-                          <Text as="b">Description:</Text>
-                          <Text>
-                            <Text>
-                              {book.description.substring(0, 90)}
-                              {book.description.length > 90 ? "..." : ""}
-                            </Text>
-                          </Text>
-                        </div>
-                      ) : (
-                        <Text>There is no Description</Text>
-                      )}
-                    </Stack>
-                  </CardBody>
-                  <Divider />
-                  <CardFooter>
-                    <ButtonGroup spacing="2">
-                      <Heading size="sm">Add to favourite</Heading>
-                    </ButtonGroup>
-                  </CardFooter>
-                </Container>
-              </HStack>
-            </Card>
+            <SmallBookCard key={book.id} book={book} />
           ))}
         </SimpleGrid>
       </Center>

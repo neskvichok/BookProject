@@ -30,7 +30,6 @@ const NewBookPage = () => {
                   submitText="Create book"
                   schema={CreateBookSchema}
                   onSubmit={async (values) => {
-                    console.log(values)
                     try {
                       const book = await createBookMutation(values)
 

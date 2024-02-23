@@ -3,9 +3,13 @@ import { z } from "zod"
 export const CreateBookrecordSchema = z.object({
   // template: __fieldName__: z.__zodType__(),
 })
+
 export const UpdateBookrecordSchema = CreateBookrecordSchema.merge(
   z.object({
-    id: z.number(),
+    userId: z.number(),
+    bookId: z.number(),
+    isLiked: z.boolean(),
+    isRead: z.boolean(),
   })
 )
 

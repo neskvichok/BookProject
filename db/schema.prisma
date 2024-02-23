@@ -87,8 +87,10 @@ model BookRecords {
   book   Book @relation(fields: [bookId], references: [id])
   bookId Int
 
-  type   String?
   rating Int?
+
+  isRead  Boolean @default(false)
+  isLiked Boolean @default(false)
 
   @@unique([bookId, userId])
 }

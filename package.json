@@ -31,6 +31,7 @@
     "@chakra-ui/react": "2.8.2",
     "@emotion/react": "11.11.3",
     "@emotion/styled": "11.11.0",
+    "@fortawesome/react-fontawesome": "0.2.0",
     "@prisma/client": "4.6.1",
     "blitz": "2.0.5",
     "formik": "2.4.5",
@@ -38,6 +39,7 @@
     "next": "14.1.0",
     "prisma": "4.6.1",
     "react": "18.2.0",
+    "react-bootstrap-icons": "1.11.3",
     "react-dom": "18.2.0",
     "secure-password": "4.0.0",
     "zod": "3.20.2"
