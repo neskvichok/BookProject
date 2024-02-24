@@ -7,18 +7,63 @@ import { useRouter } from "next/router"
 import { withBlitz } from "src/blitz-client"
 import "src/styles/globals.css"
 
-import { ChakraProvider, HStack, Flex } from "@chakra-ui/react"
+import {
+  ChakraProvider,
+  HStack,
+  Flex,
+  Center,
+  Button,
+  Card,
+  CardBody,
+  CardHeader,
+  Heading,
+  Img,
+  VStack,
+} from "@chakra-ui/react"
 import TopMenu from "./_TopMenu"
 
 function RootErrorFallback({ error }: ErrorFallbackProps) {
   if (error instanceof AuthenticationError) {
-    return <div>Error: You are not authenticated</div>
+    return (
+      <>
+        <Center padding="115px">
+          <VStack>
+            <Card>
+              <CardHeader>
+                <Heading size="md">You must be logged in to access the site</Heading>
+              </CardHeader>
+              <CardBody>
+                <Center>
+                  <Heading size="sm">You can:</Heading>
+                  <Link href={Routes.SignupPage()}>
+                    <Button margin="10px">Sign Up</Button>
+                  </Link>
+                  <Heading size="sm">or</Heading>
+                  <Link href={Routes.LoginPage()}>
+                    <Button margin="10px">Log In</Button>
+                  </Link>
+                </Center>
+              </CardBody>
+            </Card>
+            <Img
+              src={`https://zaxid.net/resources/photos/news/202401/1578978_3029217.jpg?20240130015707&q=100`}
+              margin="30px"
+              width="512px"
+              height="341px"
+            />
+          </VStack>
+        </Center>
+        {/* <BooksList /> */}
+      </>
+    )
   } else if (error instanceof AuthorizationError) {
     return (
-      <ErrorComponent
-        statusCode={error.statusCode}
-        title="Sorry, you are not authorized to access this"
-      />
+      <>
+        <ErrorComponent
+          statusCode={error.statusCode}
+          title="Sorry, you are not authorized to access this"
+        />
+      </>
     )
   } else {
     return (

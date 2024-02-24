@@ -44,7 +44,7 @@ function SmallBookCard({ book }: SmallBookCardProps) {
     <Card key={book.id} maxW="xl">
       <HStack>
         <Img
-          src={`https://picsum.photos/id/${book.id + 250}/200/300`}
+          src={`https://picsum.photos/id/${book.id}/200/300`}
           width="200px"
           height="300px"
           margin="15px"

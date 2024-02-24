@@ -7,7 +7,7 @@ import { useRouter } from "next/router"
 import { withBlitz } from "src/blitz-client"
 // import "src/styles/globals.css"
 
-import { ChakraProvider, HStack, Flex, Heading } from "@chakra-ui/react"
+import { ChakraProvider, HStack, Flex, Heading, Button } from "@chakra-ui/react"
 
 function TopMenu() {
   const router = useRouter()
@@ -27,22 +27,51 @@ function TopMenu() {
     >
       <HStack spacing="10">
         <Link href={Routes.Home()}>
-          <Heading size="md"> Main</Heading>
+          <Button variant="link" colorScheme="white">
+            <Heading size="md" color="white">
+              {" "}
+              Main
+            </Heading>
+          </Button>
         </Link>
         <Link href={Routes.BooksPage()}>
-          <Heading size="md"> Books</Heading>
+          <Button variant="link" colorScheme="white">
+            <Heading size="md" color="white">
+              {" "}
+              Books
+            </Heading>
+          </Button>
         </Link>
         <Link href={Routes.NewBookPage()}>
-          <Heading size="md"> Add New Book</Heading>
+          <Button variant="link" colorScheme="white">
+            <Heading size="md" color="white">
+              {" "}
+              Add New Book
+            </Heading>
+          </Button>
         </Link>
         <Link href={Routes.Page404()}>
-          <Heading size="md"> Account</Heading>
+          <Button variant="link" colorScheme="white">
+            <Heading size="md" color="white">
+              {" "}
+              Account
+            </Heading>
+          </Button>
         </Link>
         <Link href={Routes.LikedBooksPage()}>
-          <Heading size="md"> My Favourite</Heading>
+          <Button variant="link" colorScheme="white">
+            <Heading size="md" color="white">
+              {" "}
+              My Favourite
+            </Heading>
+          </Button>
         </Link>
         <Link href={Routes.ReadBooksPage()}>
-          <Heading size="md"> My Read</Heading>
+          <Button variant="link" colorScheme="white">
+            <Heading size="md" color="white">
+              My Read
+            </Heading>
+          </Button>
         </Link>
       </HStack>
     </Flex>

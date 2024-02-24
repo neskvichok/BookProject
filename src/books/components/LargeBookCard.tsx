@@ -53,6 +53,12 @@ function LargeBookCard({ book }: LargeBookCardProps) {
   return (
     <Card maxW="5xl">
       <HStack>
+        <Img
+          src={`https://picsum.photos/id/${book.id}/350/550`}
+          margin="30px"
+          width="350px"
+          height="550px"
+        />
         <Container>
           <Stack mt="6" spacing="3">
             <CardHeader>
