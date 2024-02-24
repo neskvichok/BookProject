@@ -8,6 +8,14 @@ export const UpdateReadingSessionSchema = CreateReadingSessionSchema.merge(
     id: z.number(),
   })
 )
+export const StartReadingSessionSchema = z.object({
+  bookId: z.number(),
+  startPage: z.number(),
+})
+
+export const FinishReadingSessionSchema = z.object({
+  endPage: z.number(),
+})
 
 export const DeleteReadingSessionSchema = z.object({
   id: z.number(),
