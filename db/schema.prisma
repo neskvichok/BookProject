@@ -92,5 +92,18 @@ model BookRecords {
   isRead  Boolean @default(false)
   isLiked Boolean @default(false)
 
+  ReadingSession ReadingSession[]
+
   @@unique([bookId, userId])
+}
+
+model ReadingSession {
+  id        Int       @id @default(autoincrement())
+  startTime DateTime
+  startPage Int
+  endTime   DateTime?
+  endPage   Int?
+
+  bookRecord   BookRecords @relation(fields: [bookRecordId], references: [id])
+  bookRecordId Int
 }
