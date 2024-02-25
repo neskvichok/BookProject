@@ -5,12 +5,16 @@ import Link from "next/link"
 import { Routes } from "@blitzjs/next"
 import { useRouter } from "next/router"
 import { withBlitz } from "src/blitz-client"
+
+import { useMutation } from "@blitzjs/rpc"
 // import "src/styles/globals.css"
 
-import { ChakraProvider, HStack, Flex, Heading, Button } from "@chakra-ui/react"
+import { ChakraProvider, HStack, Flex, Heading, Button, Center } from "@chakra-ui/react"
+import logout from "src/auth/mutations/logout"
 
 function TopMenu() {
   const router = useRouter()
+  const [logoutMutation] = useMutation(logout)
   return (
     <Flex
       as="nav"
@@ -50,14 +54,6 @@ function TopMenu() {
             </Heading>
           </Button>
         </Link>
-        <Link href={Routes.Page404()}>
-          <Button variant="link" colorScheme="white">
-            <Heading size="md" color="white">
-              {" "}
-              Account
-            </Heading>
-          </Button>
-        </Link>
         <Link href={Routes.LikedBooksPage()}>
           <Button variant="link" colorScheme="white">
             <Heading size="md" color="white">
@@ -73,6 +69,17 @@ function TopMenu() {
             </Heading>
           </Button>
         </Link>
+        <Button
+          onClick={async () => {
+            await logoutMutation()
+          }}
+          variant="link"
+          colorScheme="white"
+        >
+          <Heading size="md" color="white">
+            Logout
+          </Heading>
+        </Button>
       </HStack>
     </Flex>
   )

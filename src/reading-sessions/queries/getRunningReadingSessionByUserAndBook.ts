@@ -4,7 +4,6 @@ import db from "db"
 import { number, z } from "zod"
 
 const GetRunningReadingSessionByUserAndBook = z.object({
-  // This accepts type of undefined, but is required at runtime
   userId: z.number().optional().refine(Boolean, "Required"),
   bookId: z.number().optional().refine(Boolean, "Required"),
 })
