@@ -72,6 +72,7 @@ model Book {
   updatedAt      DateTime         @updatedAt
   description    String?
   name           String
+  coverlink      String?
   author         String
   pageNum        Int
   isbn           String

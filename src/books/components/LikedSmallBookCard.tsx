@@ -42,12 +42,16 @@ function LikedSmallBookCard({ book }: LikedSmallBookCardProps) {
   const result = isLiked ? (
     <Card key={book.id} maxW="xl">
       <HStack>
-        <Img
-          src={`https://picsum.photos/id/${book.id}/200/300`}
-          width="200px"
-          height="300px"
-          margin="15px"
-        />
+        {book.coverlink != null ? (
+          <Img src={book.coverlink} width="200px" height="300px" margin="15px" />
+        ) : (
+          <Img
+            src={`https://picsum.photos/id/${book.id}/200/300`}
+            width="200px"
+            height="300px"
+            margin="15px"
+          />
+        )}
         <Container>
           <CardBody>
             <Stack mt="6" spacing="3">

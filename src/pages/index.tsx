@@ -18,6 +18,7 @@ import {
   VStack,
 } from "@chakra-ui/react"
 import { BooksList } from "./books"
+import TopMenu from "./_TopMenu"
 
 /*
  * This file is just for a pleasant getting started page for your new app.

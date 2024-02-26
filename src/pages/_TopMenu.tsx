@@ -5,16 +5,31 @@ import Link from "next/link"
 import { Routes } from "@blitzjs/next"
 import { useRouter } from "next/router"
 import { withBlitz } from "src/blitz-client"
+import { useMutation, useQuery } from "@blitzjs/rpc"
 
-import { useMutation } from "@blitzjs/rpc"
 // import "src/styles/globals.css"
 
 import { ChakraProvider, HStack, Flex, Heading, Button, Center } from "@chakra-ui/react"
 import logout from "src/auth/mutations/logout"
+import getRunningReadingSessionByUser from "src/reading-sessions/queries/getRunningReadingSessionByUser"
+import { useCurrentUser } from "src/users/hooks/useCurrentUser"
+import getCurrentUser from "src/users/queries/getCurrentUser"
+import { ReadingSession } from "@prisma/client"
+import MiniReadingSessionCard from "src/books/components/MiniReadingSessionCard"
 
 function TopMenu() {
   const router = useRouter()
+  const currentUser = useCurrentUser()
+
   const [logoutMutation] = useMutation(logout)
+  const [runningReadingSession] = useQuery(
+    getRunningReadingSessionByUser,
+    {
+      userId: currentUser?.id,
+    },
+    { useErrorBoundary: false }
+  )
+
   return (
     <Flex
       as="nav"
@@ -69,17 +84,26 @@ function TopMenu() {
             </Heading>
           </Button>
         </Link>
-        <Button
-          onClick={async () => {
-            await logoutMutation()
-          }}
-          variant="link"
-          colorScheme="white"
-        >
-          <Heading size="md" color="white">
-            Logout
-          </Heading>
-        </Button>
+        {currentUser != null ? (
+          <Button
+            onClick={async () => {
+              await logoutMutation()
+            }}
+            variant="link"
+            colorScheme="white"
+          >
+            <Heading size="md" color="white">
+              Logout
+            </Heading>
+          </Button>
+        ) : (
+          <></>
+        )}
+        {runningReadingSession != null ? (
+          <MiniReadingSessionCard session={runningReadingSession} />
+        ) : (
+          <></>
+        )}
       </HStack>
     </Flex>
   )

@@ -1,6 +1,6 @@
 import { ErrorFallbackProps, ErrorComponent, ErrorBoundary, AppProps } from "@blitzjs/next"
 import { AuthenticationError, AuthorizationError } from "blitz"
-import React from "react"
+import React, { Suspense } from "react"
 import Link from "next/link"
 import { Routes } from "@blitzjs/next"
 import { useRouter } from "next/router"
@@ -79,7 +79,10 @@ function MyApp({ Component, pageProps }: AppProps) {
   const getLayout = Component.getLayout || ((page) => page)
   return (
     <ChakraProvider>
-      <TopMenu />
+      <Suspense fallback="Loading...">
+        <TopMenu />
+      </Suspense>
+
       <ErrorBoundary FallbackComponent={RootErrorFallback}>
         <div style={{ marginTop: "75px" }}> {getLayout(<Component {...pageProps} />)}</div>
       </ErrorBoundary>

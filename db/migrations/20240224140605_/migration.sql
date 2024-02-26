@@ -43,6 +43,7 @@ CREATE TABLE "Book" (
     "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" DATETIME NOT NULL,
     "description" TEXT,
+    "coverlink" TEXT,
     "name" TEXT NOT NULL,
     "author" TEXT NOT NULL,
     "pageNum" INTEGER NOT NULL,
