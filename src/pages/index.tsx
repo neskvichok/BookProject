@@ -5,7 +5,6 @@ import { useCurrentUser } from "src/users/hooks/useCurrentUser"
 import logout from "src/auth/mutations/logout"
 import { useMutation } from "@blitzjs/rpc"
 import { Routes, BlitzPage } from "@blitzjs/next"
-import styles from "src/styles/Home.module.css"
 import {
   Button,
   ButtonGroup,
@@ -15,15 +14,63 @@ import {
   Center,
   Heading,
   Img,
+  SimpleGrid,
   VStack,
 } from "@chakra-ui/react"
-import { BooksList } from "./books"
-import TopMenu from "./_TopMenu"
+import { usePaginatedQuery } from "@blitzjs/rpc"
+import { useRouter } from "next/router"
+import getBooks from "src/books/queries/getBooks"
+import { ArrowBackIcon, ArrowForwardIcon } from "@chakra-ui/icons"
+import SmallBookCard from "src/books/components/SmallBookCard"
 
-/*
- * This file is just for a pleasant getting started page for your new app.
- * You can delete everything in here and start from scratch if you like.
- */
+const ITEMS_PER_PAGE = 10
+
+export const BooksList = () => {
+  const router = useRouter()
+  const page = Number(router.query.page) || 0
+  const [{ books, hasMore }] = usePaginatedQuery(getBooks, {
+    orderBy: { id: "asc" },
+    skip: ITEMS_PER_PAGE * page,
+    take: ITEMS_PER_PAGE,
+  })
+
+  const goToPreviousPage = () => router.push({ query: { page: page - 1 } })
+  const goToNextPage = () => router.push({ query: { page: page + 1 } })
+  const height = 100
+  const width = 50
+  return (
+    <VStack>
+      <Center>
+        <SimpleGrid columns={2} spacing={10}>
+          {books.map((book) => (
+            <SmallBookCard key={book.id} book={book} />
+          ))}
+        </SimpleGrid>
+      </Center>
+      <footer style={{ margin: "20px", padding: "5px" }}>
+        <Button
+          leftIcon={<ArrowBackIcon />}
+          colorScheme="grey"
+          variant="outline"
+          isDisabled={page === 0}
+          onClick={goToPreviousPage}
+          marginRight="15px"
+        >
+          Previous
+        </Button>
+        <Button
+          colorScheme="grey"
+          rightIcon={<ArrowForwardIcon />}
+          variant="outline"
+          isDisabled={!hasMore}
+          onClick={goToNextPage}
+        >
+          Next
+        </Button>
+      </footer>
+    </VStack>
+  )
+}
 
 const UserInfo = () => {
   const currentUser = useCurrentUser()
@@ -32,22 +79,11 @@ const UserInfo = () => {
   if (currentUser) {
     return (
       <Center>
-        <Card minW="3xl">
-          <CardBody>
-            <button
-              onClick={async () => {
-                await logoutMutation()
-              }}
-            >
-              Logout
-            </button>
-            <div>
-              User id: <code>{currentUser.id}</code>
-              <br />
-              User role: <code>{currentUser.role}</code>
-            </div>
-          </CardBody>
-        </Card>
+        <div>
+          <Suspense fallback={<div>Loading...</div>}>
+            <BooksList />
+          </Suspense>
+        </div>
       </Center>
     )
   } else {
