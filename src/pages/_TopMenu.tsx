@@ -53,14 +53,6 @@ function TopMenu() {
             </Heading>
           </Button>
         </Link>
-        <Link href={Routes.BooksPage()}>
-          <Button variant="link" colorScheme="white">
-            <Heading size="md" color="white">
-              {" "}
-              Books
-            </Heading>
-          </Button>
-        </Link>
         <Link href={Routes.NewBookPage()}>
           <Button variant="link" colorScheme="white">
             <Heading size="md" color="white">
